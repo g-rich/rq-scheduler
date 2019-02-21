@@ -256,6 +256,10 @@ class Scheduler(object):
         job_id = item
         if isinstance(item, self.job_class):
             job_id = item.id
+
+        if job_id is None:
+            job_id = 'None'
+
         return self.connection.zscore(self.scheduled_jobs_key, job_id) is not None
 
     def change_execution_time(self, job, date_time):
